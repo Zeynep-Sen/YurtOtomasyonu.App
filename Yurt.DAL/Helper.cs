@@ -13,7 +13,6 @@ namespace Yurt.DAL
     {
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["cstr"].ConnectionString);
         SqlCommand cmd = null;
-
         public int ExecuteNonQuery(string cmdtext, SqlParameter[] p)
         {
             try
@@ -27,15 +26,12 @@ namespace Yurt.DAL
                 int sonuc = cmd.ExecuteNonQuery();
                 return sonuc;
             }
-
             catch (Exception)
             {
-
                 throw;
             }
-
-
         }
+
         public SqlDataReader ExecuteReader(string cmdtext, SqlParameter[] p)
         {
             try
@@ -55,6 +51,14 @@ namespace Yurt.DAL
             }
         }
 
+        public DataTable GetDataTable(string cmdtext)
+        {
+            SqlDataAdapter da = new SqlDataAdapter(cmdtext, cn);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            return dt;
+        }
+
         public void OpenConnection()
         {
             try
@@ -66,14 +70,15 @@ namespace Yurt.DAL
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
+
         public void Dispose()
         {
             cn.Dispose();
-            cmd.Dispose();
+           // cmd.Dispose();
+           //Ogrenci listele deyince hata veriyor!!!!!!!
         }
     }
 }

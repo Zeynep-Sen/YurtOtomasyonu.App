@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ using Yurt.MODELS;
 
 namespace Yurt.BLL
 {
-    public class OgrenciBL
+    public class OgrenciBL :IDisposable
     {
         Helper hlp = new Helper();
         public bool Kaydet(Ogrenci ogr)
@@ -35,8 +36,8 @@ namespace Yurt.BLL
         {
             try
             {
-                SqlParameter[] p = { new SqlParameter("@ad", ogr.ad), new SqlParameter("@soyad", ogr.soyad), new SqlParameter("@tc", ogr.tc), new SqlParameter("@AnneAd", ogr.anneAd), new SqlParameter("@anneSoyad", ogr.anneSoyad), new SqlParameter("@babaAd", ogr.babaAd), new SqlParameter("@ogrenciId", ogr.ogrenciId), new SqlParameter("@babaSoyad", ogr.babaSoyad) };
-                return hlp.ExecuteNonQuery("Update Ogrenciler set ad=@ad,soyad=@soyad,tc=@tc,=anneAd=@anneAd,anneSoyad=@anneSoyad,babaAd=@babaAd,babaSoyad=@,babaSoyad Where @ogrenciId=ogrenciId", p) > 0;
+                SqlParameter[] p = { new SqlParameter("@ad", ogr.ad), new SqlParameter("@soyad", ogr.soyad), new SqlParameter("@tc", ogr.tc), new SqlParameter("@AnneAd", ogr.anneAd), new SqlParameter("@anneSoyad", ogr.anneSoyad), new SqlParameter("@babaAd", ogr.babaAd), new SqlParameter("@okulId", ogr.okulId), new SqlParameter("@iletisimId", ogr.iletisimId), new SqlParameter("@ogrenciId", ogr.ogrenciId), new SqlParameter("@babaSoyad", ogr.babaSoyad) };
+                return hlp.ExecuteNonQuery("Update Ogrenciler set ad=@ad,soyad=@soyad,tc=@tc,anneAd=@anneAd,anneSoyad=@anneSoyad,babaAd=@babaAd,babaSoyad=@babaSoyad,okulId=@okulId, iletisimId=@iletisimId Where @ogrenciId=ogrenciId", p) > 0;
             }
             catch (SqlException ex)
             {
@@ -48,12 +49,12 @@ namespace Yurt.BLL
             }
 
         }
-        public Ogrenci OgrenciBul(string Tc)
+        public Ogrenci OgrenciBul(string tc)
         {
             try
             {
-                SqlParameter[] p = { new SqlParameter("@tc", Tc) };
-                SqlDataReader dr = hlp.ExecuteReader("Select ogrenciId, ad, soyad, tc, anneAd, anneSoyad, babaAd, babaSoyad from Ogrenciler Where tc=@tc", p);
+                SqlParameter[] p = { new SqlParameter("@tc", tc) };
+                SqlDataReader dr = hlp.ExecuteReader("Select ogrenciId, ad, soyad, tc, anneAd, anneSoyad, babaAd, babaSoyad, okulId, iletisimId from Ogrenciler Where tc=@tc", p);
                 Ogrenci ogr = null;
 
 
@@ -77,6 +78,17 @@ namespace Yurt.BLL
             {
                 throw;
             }
+        }
+        public bool OgrenciSil(int ogrenciid)
+        {
+            SqlParameter[] p = { new SqlParameter("@ogrenciId", ogrenciid) };
+            return hlp.ExecuteNonQuery("Delete from Ogrenciler where ogrenciId=@ogrenciId", p) > 0;
+        }
+
+        public DataTable OgrenciTable() => hlp.GetDataTable("Select * from  Ogrenciler");
+        public void Dispose()
+        {
+            ((IDisposable)hlp).Dispose();
         }
     }
 }

@@ -33,6 +33,8 @@ namespace YurtOtomasyonu.App
             ogr.anneSoyad = txt_AnneSoy.Text.Trim();
             ogr.babaAd = txt_BabaAdi.Text.Trim();
             ogr.babaSoyad = txt_BabaSoy.Text.Trim();
+            ogr.okulId = (int)cmb_OklAdi.SelectedValue;
+            
             obl.Kaydet(ogr);
             switch (ogrenciId)
             {
@@ -68,9 +70,15 @@ namespace YurtOtomasyonu.App
         private void frmOgrKayit_Load(object sender, EventArgs e)
         {
             OdaBL ob = new OdaBL();
+            OkulBLL ok = new OkulBLL();
             cmb_Oda.DisplayMember = "Oda_No";
             cmb_Oda.ValueMember = "Oda_Id";
             cmb_Oda.DataSource = ob.OdaListesi();
+            cmb_OklAdi.DisplayMember = "Okul_Ad";
+            cmb_Bolum.DisplayMember = "Bolum";
+            cmb_OklAdi.ValueMember = "Okul_Id";
+            cmb_Bolum.DataSource = ok.OkulListesi();
+            cmb_OklAdi.DataSource = ok.OkulListesi();
             
         }
 
@@ -80,6 +88,47 @@ namespace YurtOtomasyonu.App
             frm.Show();
 
 
+        }
+        void Temizle()
+        {
+            foreach (Control item in this.Controls["pnl_gnlTxt"].Controls)
+            {
+                item.Text = string.Empty;
+            }
+           
+            ogrenciId = 0;
+            cmb_OklAdi.SelectedIndex = 0;
+            cmb_Oda.SelectedIndex = 0; 
+            cmb_Kat.SelectedIndex = 0;
+            cmb_Bolum.SelectedIndex = 0;
+            btn_Sil.Visible = false;
+            btn_Kaydet.Text = "Kaydet";
+        }
+        private void btn_Sil_Click(object sender, EventArgs e)
+
+        {
+            frmAnasayfa frm = new frmAnasayfa(this);
+            DialogResult cvp = MessageBox.Show("Kayıt Silinecek. Emin misiniz?", "Silme Onayı", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (cvp == DialogResult.Yes)
+            {
+                OgrenciBL obl = new OgrenciBL();
+                if (obl.OgrenciSil(ogrenciId))
+                {
+                    MessageBox.Show("Silme Başarılı!");
+                    Temizle();
+                }
+                else
+                {
+                    MessageBox.Show("Silme hatalı!");
+                }
+                obl.Dispose();
+            }
+            else
+            {
+                MessageBox.Show("İşlem İptal Edildi");
+                Temizle();
+            }
         }
     }
 }

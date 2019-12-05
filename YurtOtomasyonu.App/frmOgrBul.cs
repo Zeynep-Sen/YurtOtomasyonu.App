@@ -27,13 +27,16 @@ namespace YurtOtomasyonu.App
         private void btn_bul_Click(object sender, EventArgs e)
         {
             OgrenciBL obl = new OgrenciBL();
-            Ogrenci ogr = obl.OgrenciBul(frm.txt_Tc.Text.Trim());
+            Ogrenci ogr = obl.OgrenciBul(txt_Bul.Text.Trim());
             if (ogr == null)
             {
                 MessageBox.Show("Öğrenci Bulunamadı");
             }
             else
-            {   
+            {
+                //TODO:form açık değilse acılmalı!!!
+                frm.btn_Sil.Visible = true;
+                frm.btn_Kaydet.Text = "Güncelle";
                 frm.txt_Ad.Text = ogr.ad;
                 frm.txt_Soyad.Text = ogr.soyad;
                 frm.txt_AnneAdi.Text = ogr.anneAd;
