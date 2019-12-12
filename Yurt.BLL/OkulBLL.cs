@@ -20,11 +20,11 @@ namespace Yurt.BLL
 
         public List<Okul> OkulListesi()
         {
-            SqlDataReader dr = hlp.ExecuteReader("Select Okul_ID, Okul_Ad, Bolum from Okul", null);
+            SqlDataReader dr = hlp.ExecuteReader("Select Okul_ID, Okul_Ad from Okul", null);
             List<Okul> lst = new List<Okul>();
             while (dr.Read())
-            {   //birden fazla bölüm olma ihtimali!! hocaya sor 
-                lst.Add(new Okul { Okul_ID = Convert.ToInt32(dr["Okul_ID"]),  Okul_Ad= (string)dr["Okul_Ad"], Bolum = (string)dr["Bolum"] });
+            {   
+                lst.Add(new Okul { Okul_ID = Convert.ToInt32(dr["Okul_ID"]),  Okul_Ad= (string)dr["Okul_Ad"] });
             }
             dr.Close();
             return lst;

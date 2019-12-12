@@ -34,13 +34,19 @@
             this.ogrenciSilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ogrenciGüncelleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ogrenciListeleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.yurtİşlemleriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.odaEklemeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.odaGüncellemeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.odaSilmeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.odaListelemeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ogrenciİşlemleriToolStripMenuItem});
+            this.ogrenciİşlemleriToolStripMenuItem,
+            this.yurtİşlemleriToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(885, 24);
@@ -61,30 +67,65 @@
             // ogrenciKaydetToolStripMenuItem
             // 
             this.ogrenciKaydetToolStripMenuItem.Name = "ogrenciKaydetToolStripMenuItem";
-            this.ogrenciKaydetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ogrenciKaydetToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.ogrenciKaydetToolStripMenuItem.Text = "Ogrenci Kaydet";
             this.ogrenciKaydetToolStripMenuItem.Click += new System.EventHandler(this.ogrenciKaydetToolStripMenuItem_Click);
             // 
             // ogrenciSilToolStripMenuItem
             // 
             this.ogrenciSilToolStripMenuItem.Name = "ogrenciSilToolStripMenuItem";
-            this.ogrenciSilToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ogrenciSilToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.ogrenciSilToolStripMenuItem.Text = "Ogrenci Sil";
             this.ogrenciSilToolStripMenuItem.Click += new System.EventHandler(this.ogrenciSilToolStripMenuItem_Click);
             // 
             // ogrenciGüncelleToolStripMenuItem
             // 
             this.ogrenciGüncelleToolStripMenuItem.Name = "ogrenciGüncelleToolStripMenuItem";
-            this.ogrenciGüncelleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ogrenciGüncelleToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.ogrenciGüncelleToolStripMenuItem.Text = "Ogrenci Güncelle";
             this.ogrenciGüncelleToolStripMenuItem.Click += new System.EventHandler(this.ogrenciGüncelleToolStripMenuItem_Click);
             // 
             // ogrenciListeleToolStripMenuItem
             // 
             this.ogrenciListeleToolStripMenuItem.Name = "ogrenciListeleToolStripMenuItem";
-            this.ogrenciListeleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ogrenciListeleToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.ogrenciListeleToolStripMenuItem.Text = "Ogrenci Listele";
             this.ogrenciListeleToolStripMenuItem.Click += new System.EventHandler(this.ogrenciListeleToolStripMenuItem_Click);
+            // 
+            // yurtİşlemleriToolStripMenuItem
+            // 
+            this.yurtİşlemleriToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.odaEklemeToolStripMenuItem,
+            this.odaGüncellemeToolStripMenuItem,
+            this.odaSilmeToolStripMenuItem,
+            this.odaListelemeToolStripMenuItem});
+            this.yurtİşlemleriToolStripMenuItem.Name = "yurtİşlemleriToolStripMenuItem";
+            this.yurtİşlemleriToolStripMenuItem.Size = new System.Drawing.Size(88, 20);
+            this.yurtİşlemleriToolStripMenuItem.Text = "Yurt İşlemleri";
+            // 
+            // odaEklemeToolStripMenuItem
+            // 
+            this.odaEklemeToolStripMenuItem.Name = "odaEklemeToolStripMenuItem";
+            this.odaEklemeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.odaEklemeToolStripMenuItem.Text = "Oda Ekleme";
+            // 
+            // odaGüncellemeToolStripMenuItem
+            // 
+            this.odaGüncellemeToolStripMenuItem.Name = "odaGüncellemeToolStripMenuItem";
+            this.odaGüncellemeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.odaGüncellemeToolStripMenuItem.Text = "Oda Güncelleme";
+            // 
+            // odaSilmeToolStripMenuItem
+            // 
+            this.odaSilmeToolStripMenuItem.Name = "odaSilmeToolStripMenuItem";
+            this.odaSilmeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.odaSilmeToolStripMenuItem.Text = "Oda Silme";
+            // 
+            // odaListelemeToolStripMenuItem
+            // 
+            this.odaListelemeToolStripMenuItem.Name = "odaListelemeToolStripMenuItem";
+            this.odaListelemeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.odaListelemeToolStripMenuItem.Text = "Oda Listeleme";
             // 
             // frmAnasayfa
             // 
@@ -110,6 +151,11 @@
         private System.Windows.Forms.ToolStripMenuItem ogrenciSilToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ogrenciGüncelleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ogrenciListeleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem yurtİşlemleriToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem odaEklemeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem odaGüncellemeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem odaSilmeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem odaListelemeToolStripMenuItem;
     }
 }
 

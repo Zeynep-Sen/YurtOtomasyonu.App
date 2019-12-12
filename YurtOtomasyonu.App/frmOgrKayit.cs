@@ -70,16 +70,20 @@ namespace YurtOtomasyonu.App
         private void frmOgrKayit_Load(object sender, EventArgs e)
         {
             OdaBL ob = new OdaBL();
-            OkulBLL ok = new OkulBLL();
+            cmb_Oda.DataSource = ob.OdaListesi();
             cmb_Oda.DisplayMember = "Oda_No";
             cmb_Oda.ValueMember = "Oda_Id";
-            cmb_Oda.DataSource = ob.OdaListesi();
+
+            OkulBLL ok = new OkulBLL();
             cmb_OklAdi.DisplayMember = "Okul_Ad";
-            cmb_Bolum.DisplayMember = "Bolum";
             cmb_OklAdi.ValueMember = "Okul_Id";
-            cmb_Bolum.DataSource = ok.OkulListesi();
             cmb_OklAdi.DataSource = ok.OkulListesi();
-            
+
+            BolumBL bol = new BolumBL();
+            cmb_Bolum.DataSource = bol.BolumListesi();
+            cmb_Bolum.DisplayMember = "BolumAd";
+            cmb_Bolum.ValueMember = "BolumId";          
+
         }
 
         private void btn_ogrBul_Click(object sender, EventArgs e)

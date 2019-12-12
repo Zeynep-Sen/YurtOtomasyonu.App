@@ -85,7 +85,9 @@ namespace Yurt.BLL
             return hlp.ExecuteNonQuery("Delete from Ogrenciler where ogrenciId=@ogrenciId", p) > 0;
         }
 
-        public DataTable OgrenciTable() => hlp.GetDataTable("Select * from  Ogrenciler");
+        public DataTable OgrenciTable() => hlp.GetDataTable("Select o.ogrenciId, o.ad, o.soyad," +
+            " o.tc, o.anneAd, o.anneSoyad, o.babaAd, o.babaSoyad, o.okulId,ok.Okul_Ad, o.iletisimId " +
+            "from  Ogrenciler o INNER JOIN Okul ok ON ok.Okul_ID=o.okulId");
         public void Dispose()
         {
             ((IDisposable)hlp).Dispose();

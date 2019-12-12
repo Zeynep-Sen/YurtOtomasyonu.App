@@ -42,10 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bolum.cs" />
     <Compile Include="Iletisim.cs" />
     <Compile Include="Oda.cs" />
     <Compile Include="Oda_Ogrenci.cs" />
     <Compile Include="Ogrenci.cs" />
+    <Compile Include="Okul_Bolum.cs" />
     <Compile Include="Okul.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

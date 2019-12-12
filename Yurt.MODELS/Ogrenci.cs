@@ -16,6 +16,7 @@ namespace Yurt.MODELS
         public string babaAd { get; set; }
         public string babaSoyad { get; set; }
         public int okulId { get; set; }
+        public int bolumId { get; set; }
         public int iletisimId { get; set; }
 
 
