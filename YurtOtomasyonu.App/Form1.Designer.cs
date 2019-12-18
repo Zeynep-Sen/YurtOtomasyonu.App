@@ -108,24 +108,28 @@
             this.odaEklemeToolStripMenuItem.Name = "odaEklemeToolStripMenuItem";
             this.odaEklemeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.odaEklemeToolStripMenuItem.Text = "Oda Ekleme";
+            this.odaEklemeToolStripMenuItem.Click += new System.EventHandler(this.odaEklemeToolStripMenuItem_Click);
             // 
             // odaGüncellemeToolStripMenuItem
             // 
             this.odaGüncellemeToolStripMenuItem.Name = "odaGüncellemeToolStripMenuItem";
             this.odaGüncellemeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.odaGüncellemeToolStripMenuItem.Text = "Oda Güncelleme";
+            this.odaGüncellemeToolStripMenuItem.Click += new System.EventHandler(this.odaGüncellemeToolStripMenuItem_Click);
             // 
             // odaSilmeToolStripMenuItem
             // 
             this.odaSilmeToolStripMenuItem.Name = "odaSilmeToolStripMenuItem";
             this.odaSilmeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.odaSilmeToolStripMenuItem.Text = "Oda Silme";
+            this.odaSilmeToolStripMenuItem.Click += new System.EventHandler(this.odaSilmeToolStripMenuItem_Click);
             // 
             // odaListelemeToolStripMenuItem
             // 
             this.odaListelemeToolStripMenuItem.Name = "odaListelemeToolStripMenuItem";
             this.odaListelemeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.odaListelemeToolStripMenuItem.Text = "Oda Listeleme";
+            this.odaListelemeToolStripMenuItem.Click += new System.EventHandler(this.odaListelemeToolStripMenuItem_Click);
             // 
             // frmAnasayfa
             // 

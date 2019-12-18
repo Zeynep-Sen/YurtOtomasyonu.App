@@ -1,0 +1,368 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="YurtModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bolum">
+          <Key>
+            <PropertyRef Name="BolumId" />
+          </Key>
+          <Property Name="BolumId" Type="int" Nullable="false" />
+          <Property Name="BolumAd" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Iletisim">
+          <Key>
+            <PropertyRef Name="Iletisim_ID" />
+          </Key>
+          <Property Name="Iletisim_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IletisimAd" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'yurtdb.dbo.IletisimOgr' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="IletisimOgr">
+          <Key>
+            <PropertyRef Name="IletisimId" />
+            <PropertyRef Name="OgrId" />
+            <PropertyRef Name="IletisimBilgisi" />
+          </Key>
+          <Property Name="IletisimId" Type="int" Nullable="false" />
+          <Property Name="OgrId" Type="int" Nullable="false" />
+          <Property Name="IletisimBilgisi" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Oda">
+          <Key>
+            <PropertyRef Name="Oda_ID" />
+          </Key>
+          <Property Name="Oda_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Kat" Type="int" />
+          <Property Name="Oda_No" Type="int" />
+          <Property Name="Kontenjan" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'yurtdb.dbo.Oda_Ogrenci' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Oda_Ogrenci">
+          <Key>
+            <PropertyRef Name="OdaID" />
+            <PropertyRef Name="OgrID" />
+          </Key>
+          <Property Name="OdaID" Type="int" Nullable="false" />
+          <Property Name="OgrID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ogrenciler">
+          <Key>
+            <PropertyRef Name="ogrenciId" />
+          </Key>
+          <Property Name="ogrenciId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ad" Type="nvarchar" MaxLength="25" />
+          <Property Name="soyad" Type="nvarchar" MaxLength="15" />
+          <Property Name="tc" Type="nvarchar" MaxLength="50" />
+          <Property Name="anneAd" Type="nvarchar" MaxLength="25" />
+          <Property Name="anneSoyad" Type="nvarchar" MaxLength="15" />
+          <Property Name="babaAd" Type="nvarchar" MaxLength="25" />
+          <Property Name="babaSoyad" Type="nvarchar" MaxLength="15" />
+          <Property Name="okulId" Type="int" />
+          <Property Name="iletisimId" Type="int" />
+        </EntityType>
+        <EntityType Name="Okul">
+          <Key>
+            <PropertyRef Name="Okul_ID" />
+          </Key>
+          <Property Name="Okul_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Okul_Ad" Type="varchar" MaxLength="35" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'yurtdb.dbo.Okul_Bolum' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Okul_Bolum">
+          <Key>
+            <PropertyRef Name="OkulId" />
+            <PropertyRef Name="BolumId" />
+          </Key>
+          <Property Name="OkulId" Type="int" Nullable="false" />
+          <Property Name="BolumId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Oda_Ogrenci_Oda">
+          <End Role="Oda" Type="Self.Oda" Multiplicity="1" />
+          <End Role="Oda_Ogrenci" Type="Self.Oda_Ogrenci" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Oda">
+              <PropertyRef Name="Oda_ID" />
+            </Principal>
+            <Dependent Role="Oda_Ogrenci">
+              <PropertyRef Name="OdaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Oda_Ogrenci_Ogrenciler">
+          <End Role="Ogrenciler" Type="Self.Ogrenciler" Multiplicity="1" />
+          <End Role="Oda_Ogrenci" Type="Self.Oda_Ogrenci" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ogrenciler">
+              <PropertyRef Name="ogrenciId" />
+            </Principal>
+            <Dependent Role="Oda_Ogrenci">
+              <PropertyRef Name="OgrID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ogrenciler_Okul">
+          <End Role="Okul" Type="Self.Okul" Multiplicity="0..1" />
+          <End Role="Ogrenciler" Type="Self.Ogrenciler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Okul">
+              <PropertyRef Name="Okul_ID" />
+            </Principal>
+            <Dependent Role="Ogrenciler">
+              <PropertyRef Name="okulId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="YurtModelStoreContainer">
+          <EntitySet Name="Bolum" EntityType="Self.Bolum" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Iletisim" EntityType="Self.Iletisim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Oda" EntityType="Self.Oda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ogrenciler" EntityType="Self.Ogrenciler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Okul" EntityType="Self.Okul" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IletisimOgr" EntityType="Self.IletisimOgr" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [IletisimOgr].[IletisimId] AS [IletisimId], 
+    [IletisimOgr].[OgrId] AS [OgrId], 
+    [IletisimOgr].[IletisimBilgisi] AS [IletisimBilgisi]
+    FROM [dbo].[IletisimOgr] AS [IletisimOgr]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Oda_Ogrenci" EntityType="Self.Oda_Ogrenci" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Oda_Ogrenci].[OdaID] AS [OdaID], 
+    [Oda_Ogrenci].[OgrID] AS [OgrID]
+    FROM [dbo].[Oda_Ogrenci] AS [Oda_Ogrenci]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Okul_Bolum" EntityType="Self.Okul_Bolum" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Okul_Bolum].[OkulId] AS [OkulId], 
+    [Okul_Bolum].[BolumId] AS [BolumId]
+    FROM [dbo].[Okul_Bolum] AS [Okul_Bolum]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Oda_Ogrenci_Oda" Association="Self.FK_Oda_Ogrenci_Oda">
+            <End Role="Oda" EntitySet="Oda" />
+            <End Role="Oda_Ogrenci" EntitySet="Oda_Ogrenci" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Oda_Ogrenci_Ogrenciler" Association="Self.FK_Oda_Ogrenci_Ogrenciler">
+            <End Role="Ogrenciler" EntitySet="Ogrenciler" />
+            <End Role="Oda_Ogrenci" EntitySet="Oda_Ogrenci" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ogrenciler_Okul" Association="Self.FK_Ogrenciler_Okul">
+            <End Role="Okul" EntitySet="Okul" />
+            <End Role="Ogrenciler" EntitySet="Ogrenciler" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="YurtModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bolum">
+          <Key>
+            <PropertyRef Name="BolumId" />
+          </Key>
+          <Property Name="BolumId" Type="Int32" Nullable="false" />
+          <Property Name="BolumAd" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Iletisim">
+          <Key>
+            <PropertyRef Name="Iletisim_ID" />
+          </Key>
+          <Property Name="Iletisim_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IletisimAd" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Oda">
+          <Key>
+            <PropertyRef Name="Oda_ID" />
+          </Key>
+          <Property Name="Oda_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Kat" Type="Int32" />
+          <Property Name="Oda_No" Type="Int32" />
+          <Property Name="Kontenjan" Type="Int32" />
+          <NavigationProperty Name="Ogrencilers" Relationship="Self.Oda_Ogrenci" FromRole="Oda" ToRole="Ogrenciler" />
+        </EntityType>
+        <EntityType Name="Ogrenciler">
+          <Key>
+            <PropertyRef Name="ogrenciId" />
+          </Key>
+          <Property Name="ogrenciId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ad" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="soyad" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="tc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="anneAd" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="anneSoyad" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="babaAd" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="babaSoyad" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="okulId" Type="Int32" />
+          <Property Name="iletisimId" Type="Int32" />
+          <NavigationProperty Name="Okul" Relationship="Self.FK_Ogrenciler_Okul" FromRole="Ogrenciler" ToRole="Okul" />
+          <NavigationProperty Name="Odas" Relationship="Self.Oda_Ogrenci" FromRole="Ogrenciler" ToRole="Oda" />
+        </EntityType>
+        <EntityType Name="Okul">
+          <Key>
+            <PropertyRef Name="Okul_ID" />
+          </Key>
+          <Property Name="Okul_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Okul_Ad" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Ogrencilers" Relationship="Self.FK_Ogrenciler_Okul" FromRole="Okul" ToRole="Ogrenciler" />
+        </EntityType>
+        <EntityType Name="IletisimOgr">
+          <Key>
+            <PropertyRef Name="IletisimId" />
+            <PropertyRef Name="OgrId" />
+            <PropertyRef Name="IletisimBilgisi" />
+          </Key>
+          <Property Name="IletisimId" Type="Int32" Nullable="false" />
+          <Property Name="OgrId" Type="Int32" Nullable="false" />
+          <Property Name="IletisimBilgisi" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Okul_Bolum">
+          <Key>
+            <PropertyRef Name="OkulId" />
+            <PropertyRef Name="BolumId" />
+          </Key>
+          <Property Name="OkulId" Type="Int32" Nullable="false" />
+          <Property Name="BolumId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Ogrenciler_Okul">
+          <End Role="Okul" Type="Self.Okul" Multiplicity="0..1" />
+          <End Role="Ogrenciler" Type="Self.Ogrenciler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Okul">
+              <PropertyRef Name="Okul_ID" />
+            </Principal>
+            <Dependent Role="Ogrenciler">
+              <PropertyRef Name="okulId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Oda_Ogrenci">
+          <End Role="Oda" Type="Self.Oda" Multiplicity="*" />
+          <End Role="Ogrenciler" Type="Self.Ogrenciler" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="YurtContex" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bolums" EntityType="Self.Bolum" />
+          <EntitySet Name="Iletisims" EntityType="Self.Iletisim" />
+          <EntitySet Name="Odas" EntityType="Self.Oda" />
+          <EntitySet Name="Ogrencilers" EntityType="Self.Ogrenciler" />
+          <EntitySet Name="Okuls" EntityType="Self.Okul" />
+          <EntitySet Name="IletisimOgrs" EntityType="Self.IletisimOgr" />
+          <EntitySet Name="Okul_Bolum" EntityType="Self.Okul_Bolum" />
+          <AssociationSet Name="FK_Ogrenciler_Okul" Association="Self.FK_Ogrenciler_Okul">
+            <End Role="Okul" EntitySet="Okuls" />
+            <End Role="Ogrenciler" EntitySet="Ogrencilers" />
+          </AssociationSet>
+          <AssociationSet Name="Oda_Ogrenci" Association="Self.Oda_Ogrenci">
+            <End Role="Oda" EntitySet="Odas" />
+            <End Role="Ogrenciler" EntitySet="Ogrencilers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="YurtModelStoreContainer" CdmEntityContainer="YurtContex">
+          <EntitySetMapping Name="Bolums">
+            <EntityTypeMapping TypeName="YurtModel.Bolum">
+              <MappingFragment StoreEntitySet="Bolum">
+                <ScalarProperty Name="BolumId" ColumnName="BolumId" />
+                <ScalarProperty Name="BolumAd" ColumnName="BolumAd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Iletisims">
+            <EntityTypeMapping TypeName="YurtModel.Iletisim">
+              <MappingFragment StoreEntitySet="Iletisim">
+                <ScalarProperty Name="Iletisim_ID" ColumnName="Iletisim_ID" />
+                <ScalarProperty Name="IletisimAd" ColumnName="IletisimAd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Odas">
+            <EntityTypeMapping TypeName="YurtModel.Oda">
+              <MappingFragment StoreEntitySet="Oda">
+                <ScalarProperty Name="Oda_ID" ColumnName="Oda_ID" />
+                <ScalarProperty Name="Kat" ColumnName="Kat" />
+                <ScalarProperty Name="Oda_No" ColumnName="Oda_No" />
+                <ScalarProperty Name="Kontenjan" ColumnName="Kontenjan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ogrencilers">
+            <EntityTypeMapping TypeName="YurtModel.Ogrenciler">
+              <MappingFragment StoreEntitySet="Ogrenciler">
+                <ScalarProperty Name="ogrenciId" ColumnName="ogrenciId" />
+                <ScalarProperty Name="ad" ColumnName="ad" />
+                <ScalarProperty Name="soyad" ColumnName="soyad" />
+                <ScalarProperty Name="tc" ColumnName="tc" />
+                <ScalarProperty Name="anneAd" ColumnName="anneAd" />
+                <ScalarProperty Name="anneSoyad" ColumnName="anneSoyad" />
+                <ScalarProperty Name="babaAd" ColumnName="babaAd" />
+                <ScalarProperty Name="babaSoyad" ColumnName="babaSoyad" />
+                <ScalarProperty Name="okulId" ColumnName="okulId" />
+                <ScalarProperty Name="iletisimId" ColumnName="iletisimId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Okuls">
+            <EntityTypeMapping TypeName="YurtModel.Okul">
+              <MappingFragment StoreEntitySet="Okul">
+                <ScalarProperty Name="Okul_ID" ColumnName="Okul_ID" />
+                <ScalarProperty Name="Okul_Ad" ColumnName="Okul_Ad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IletisimOgrs">
+            <EntityTypeMapping TypeName="YurtModel.IletisimOgr">
+              <MappingFragment StoreEntitySet="IletisimOgr">
+                <ScalarProperty Name="IletisimId" ColumnName="IletisimId" />
+                <ScalarProperty Name="OgrId" ColumnName="OgrId" />
+                <ScalarProperty Name="IletisimBilgisi" ColumnName="IletisimBilgisi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Okul_Bolum">
+            <EntityTypeMapping TypeName="YurtModel.Okul_Bolum">
+              <MappingFragment StoreEntitySet="Okul_Bolum">
+                <ScalarProperty Name="OkulId" ColumnName="OkulId" />
+                <ScalarProperty Name="BolumId" ColumnName="BolumId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Oda_Ogrenci" TypeName="YurtModel.Oda_Ogrenci" StoreEntitySet="Oda_Ogrenci">
+            <EndProperty Name="Oda">
+              <ScalarProperty Name="Oda_ID" ColumnName="OdaID" />
+            </EndProperty>
+            <EndProperty Name="Ogrenciler">
+              <ScalarProperty Name="ogrenciId" ColumnName="OgrID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

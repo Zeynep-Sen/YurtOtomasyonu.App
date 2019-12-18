@@ -64,5 +64,37 @@ namespace YurtOtomasyonu.App
             frm.MdiParent = this;
             frm.Show();
         }
+
+        private void odaEklemeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmOdaKayit frm = new frmOdaKayit();
+            frm.WindowState = FormWindowState.Maximized;
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void odaGüncellemeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OdaBul frm = new OdaBul();
+            frm.WindowState = FormWindowState.Maximized;
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void odaSilmeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OdaBul frm = new OdaBul();
+            frm.WindowState = FormWindowState.Maximized;
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void odaListelemeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmOdaListele frm = new frmOdaListele();
+            frm.WindowState = FormWindowState.Maximized;
+            frm.MdiParent = this;
+            frm.Show();
+        }
     }
 }
